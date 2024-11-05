@@ -1,8 +1,12 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+/* eslint-disable no-undef */
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+
+// Retrieve Firebase API key from environment variable
+const apiKey = import.meta.env.VITE_FIREBASE_API; 
+
 const firebaseConfig = {
-  apiKey: "AIzaSyD1XX9x1kOYgdv9POM8jRnFPRa8Awhxjmc",
+  apiKey: apiKey,
   authDomain: "taskmanager-112.firebaseapp.com",
   projectId: "taskmanager-112",
   storageBucket: "taskmanager-112.firebasestorage.app",
@@ -11,6 +15,7 @@ const firebaseConfig = {
   measurementId: "G-FNKSP484JJ",
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
