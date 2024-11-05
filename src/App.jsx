@@ -7,9 +7,9 @@ import AddTaskForm from "./components/AddTaskForm";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const addTask = (newTask) => {
-    const taskWithId = { ...newTask, id: Date.now() };
-    setTasks([...tasks, taskWithId]);
+  const addTask = (task) => {
+    const newTask = { ...task, id: Date.now() };
+    setTasks((prevTasks) => [...prevTasks, newTask]);
   };
   const updateTask = (id, updatedTask) => {
     setTasks(
@@ -25,7 +25,7 @@ function App() {
         <Sidebar />
         <div className="flex-1 p-4 flex flex-col">
           <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-          <main className="flex-1 p-6 bg-gray-1">
+          <main className="flex-1 p-6">
             <AddTaskForm addTask={addTask} />
             <TaskList
               tasks={tasks}

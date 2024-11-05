@@ -14,7 +14,7 @@ const AddTaskForm = ({ addTask }) => {
     setTitle("");
     setDescription("");
     setPriority("Medium");
-    setDueDate("");
+    setDueDate(null);
   };
 
   return (
@@ -22,7 +22,9 @@ const AddTaskForm = ({ addTask }) => {
       onSubmit={onSubmitHandler}
       className="mb-4 bg-white dark:bg-gray-800 p-4 rounded shadow"
     >
-      <h3 className="font-semibold mb-2 text-gray-800 dark:text-gray-100">Add New Task</h3>
+      <h3 className="font-semibold mb-2 text-gray-800 dark:text-gray-100">
+        Add New Task
+      </h3>
       <input
         type="text"
         placeholder="Task Title"
@@ -45,19 +47,25 @@ const AddTaskForm = ({ addTask }) => {
         className="w-full p-2 mb-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
         required
       >
-        <option value="Low">Low</option>
-        <option value="Medium">Medium</option>
-        <option value="High">High</option>
+        <option value="Low" className="text-green-400">
+          Low
+        </option>
+        <option value="Medium" className="text-yellow-400">
+          Medium
+        </option>
+        <option value="High" className="text-red-400">
+          High
+        </option>
       </select>
       <input
         type="date"
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
-        className="w-full p-2 mb-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+        className="w-full p-2 mb-2 border border-gray-300 rounded dark:bg-gray-700 dark:text-gray-100"
       />
       <button
         type="submit"
-        className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
+        className="w-full bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
       >
         Add Task
       </button>

@@ -38,9 +38,15 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
             onChange={(e) => setEditedPriority(e.target.value)}
             className="w-full p-2 mb-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded text-gray-900 dark:text-gray-100"
           >
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
+            <option value="Low" className="text-green-400">
+              Low
+            </option>
+            <option value="Medium" className="text-yellow-400">
+              Medium
+            </option>
+            <option value="High" className="text-red-400">
+              High
+            </option>
           </select>
           <input
             type="date"
