@@ -7,7 +7,7 @@ const Header = ({ isDarkMode, setIsDarkMode }) => {
   return (
     <header className="flex items-center justify-between px-6 py-4 bg-white shadow-md rounded-lg dark:bg-gray-800">
       <h1 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
-        Task Manager
+        Task Scheduler
       </h1>
       <div className="flex items-center space-x-4">
         <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
