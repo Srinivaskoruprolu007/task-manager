@@ -1,24 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import TaskList from "./components/TaskList";
 import AddTaskForm from "./components/AddTaskForm";
+import { addTask, getTasks, updateTask, deleteTask } from "./firestoreService";
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const addTask = (task) => {
-    const newTask = { ...task, id: Date.now() };
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const fetchedTasks = await getTasks();
+        setTasks(fetchedTasks);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+    fetchTasks();
+  }, []);
+
+  const handleAddTask = async (task) => {
+    try {
+      await addTask(task);
+      const updatedTasks = await getTasks();
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
   };
-  const updateTask = (id, updatedTask) => {
-    setTasks(
-      tasks.map((task) => (task.id === id ? { ...task, ...updatedTask } : task))
-    );
+
+  const handleUpdateTask = async (id, updatedTask) => {
+    try {
+      await updateTask(id, updatedTask);
+      const updatedTasks = await getTasks();
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
   };
-  const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+
+  const handleDeleteTask = async (id) => {
+    try {
+      await deleteTask(id);
+      const updatedTasks = await getTasks();
+      setTasks(updatedTasks);
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
   };
+
   return (
     <div className={isDarkMode ? "dark" : ""}>
       <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 text-gray-800">
@@ -26,11 +58,11 @@ function App() {
         <div className="flex-1 p-4 flex flex-col">
           <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
           <main className="flex-1 p-6">
-            <AddTaskForm addTask={addTask} />
+            <AddTaskForm addTask={handleAddTask} />
             <TaskList
               tasks={tasks}
-              onDelete={deleteTask}
-              onUpdate={updateTask}
+              onDelete={handleDeleteTask}
+              onUpdate={handleUpdateTask}
             />
           </main>
         </div>
