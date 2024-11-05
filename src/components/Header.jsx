@@ -30,8 +30,8 @@ const Header = ({ isDarkMode, setIsDarkMode }) => {
             <FaMoon className="text-blue-500" />
           )}
           <span
-            className={`absolute block w-4 h-4 transition-transform duration-300 ${
-              isDarkMode ? "translate-x-5" : ""
+            className={`absolute block w-4 h-4 transition ease-in-out duration-500 ${
+              isDarkMode ? "translate-x-10" : ""
             }`}
           ></span>
         </button>
